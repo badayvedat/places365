@@ -162,7 +162,8 @@ def get_environment_type(img_path):
 
     # output the IO prediction
     io_image = np.mean(labels_IO[idx[:10]])  # vote for the indoor or outdoor
-    return io_image >= 0.5
+    pred_label = "outdoor" if io_image >= 0.5 else "indoor"
+    return pred_label
 
 
 if __name__ == "__main__":
@@ -184,4 +185,3 @@ if __name__ == "__main__":
     weight_softmax[weight_softmax < 0] = 0
 
     env_type = get_environment_type(args.input)
-    print(env_type)
